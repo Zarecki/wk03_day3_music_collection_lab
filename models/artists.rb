@@ -22,6 +22,12 @@ def self.list_all
   return SqlRunner.run(sql).map{ |artist| Artist.new(artist) }
 end
 
+def edit_artist()
+    sql = "UPDATE artists SET name = $1
+    WHERE id = $2"
+    values = [@name, @id]
+    SqlRunner.run(sql, values)
+  end
 
 def self.find_artist_by_id(id)
   sql = "SELECT * FROM albums WHERE artist_id = $1"

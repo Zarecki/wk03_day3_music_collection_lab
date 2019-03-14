@@ -41,23 +41,17 @@ def artist
 end
 
 
-# 
-# def find_artist_by_album
-#   sql = "SELECT * FROM albums WHERE id = $1"
-#   values = [@artist_id]
-#   result = SqlRunner.run(sql, values).first
-#   binding.pry
-#   Artist.new(result)
-# end
-
-
-
 def find_album_by_id(id)
   sql = "SELECT * FROM albums WHERE artist_id = $1"
   values = [id]
   return SqlRunner.run(sql, values).map{ |album| Album.new(album)}
 end
 
-
+def edit_album(album_id)
+    sql = "UPDATE albums SET title = $1, genre = $2
+    WHERE id = $3"
+    values = [@name, @genre, album_id]
+    SqlRunner.run(sql, values)
+  end
 
 end
